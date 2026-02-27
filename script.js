@@ -10,7 +10,7 @@ document.getElementById("bookingForm").addEventListener("submit", async function
         time: document.getElementById("time").value
     };
 
-    const response = await fetch("http://localhost:5000/book", {
+    const response = await fetch("https://career-backend-9w86.onrender.com/book", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
