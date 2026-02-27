@@ -10,7 +10,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // 🔥 MongoDB connection
-mongoose.connect("//career-backend-9w86.onrender.com/book")
+mongoose.connect("mongodb+srv://careeradmin:om9493739705@cluster0.xxxxx.mongodb.net/?retryWrites=true&w=majority")
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.log("MongoDB Error:", err));
 
