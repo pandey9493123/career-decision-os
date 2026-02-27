@@ -1,7 +1,14 @@
-document.getElementById("bookingForm").addEventListener("submit", async function (e) {
+// 🚀 Render backend URL
+const backendURL = "https://career-backend-9w86.onrender.com";
+
+const form = document.getElementById("bookingForm");
+const messageDiv = document.getElementById("message");
+
+form.addEventListener("submit", async function (e) {
     e.preventDefault();
 
-    const bookingData = {
+    // Collect form data
+    const data = {
         name: document.getElementById("name").value,
         college: document.getElementById("college").value,
         sessionType: document.getElementById("sessionType").value,
@@ -10,16 +17,25 @@ document.getElementById("bookingForm").addEventListener("submit", async function
         time: document.getElementById("time").value
     };
 
-    const response = await fetch("https://career-backend-9w86.onrender.com/book", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(bookingData)
-    });
+    // ✅ Debugging
+    console.log("Form submitted!", data);
+    alert("Form submitted!");
 
-    const result = await response.json();
+    try {
+        const response = await fetch(`${backendURL}/book`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
-    document.getElementById("output").innerHTML =
-        `<h3>✅ ${result.message}</h3>`;
+        const result = await response.json();
+        console.log(result);
+        messageDiv.textContent = result.message;
+        form.reset();
+    } catch (error) {
+        console.error("Error:", error);
+        messageDiv.textContent = "Error submitting booking.";
+    }
 });

@@ -9,12 +9,12 @@ const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
-// 🔥 CONNECT TO MONGODB
-mongoose.connect("mongodb+srv://careeradmin:<om9493739705>@cluster0.bb7jnd6.mongodb.net/?appName=Cluster0")
+// 🔥 MongoDB connection
+mongoose.connect("//career-backend-9w86.onrender.com/book")
     .then(() => console.log("MongoDB Connected"))
     .catch((err) => console.log("MongoDB Error:", err));
 
-// 📦 Booking Schema
+// Booking schema
 const bookingSchema = new mongoose.Schema({
     name: String,
     college: String,
@@ -22,15 +22,12 @@ const bookingSchema = new mongoose.Schema({
     duration: String,
     date: String,
     time: String,
-    createdAt: {
-        type: Date,
-        default: Date.now
-    }
+    createdAt: { type: Date, default: Date.now }
 });
 
 const Booking = mongoose.model("Booking", bookingSchema);
 
-// ✅ POST - Save Booking
+// POST - Save booking
 app.post("/book", async (req, res) => {
     try {
         const newBooking = new Booking(req.body);
@@ -41,7 +38,7 @@ app.post("/book", async (req, res) => {
     }
 });
 
-// ✅ GET - Get All Bookings
+// GET - all bookings
 app.get("/bookings", async (req, res) => {
     try {
         const bookings = await Booking.find().sort({ createdAt: -1 });
@@ -51,9 +48,6 @@ app.get("/bookings", async (req, res) => {
     }
 });
 
-// 🚀 Render-Compatible Port
+// Render-compatible port
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
