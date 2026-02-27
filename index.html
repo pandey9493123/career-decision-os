@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Career Decision OS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <h2>Career Decision OS</h2>
+    </div>
+
+    <!-- Main Heading -->
+    <h1>Book a Mentorship Session</h1>
+    <p class="subtitle">
+        Connect with Alumni & Professionals for Career Guidance
+    </p>
+
+    <!-- Booking Form -->
+    <form id="bookingForm">
+        <input type="text" id="name" placeholder="Your Name">
+        <input type="text" id="college" placeholder="College Name">
+
+        <select id="sessionType">
+            <option value="">Select Session Type</option>
+            <option value="College Guidance">College Guidance</option>
+            <option value="Career Guidance">Career Guidance</option>
+            <option value="Mentorship">Mentorship</option>
+        </select>
+
+        <select id="duration">
+            <option value="">Select Duration</option>
+            <option value="30 Minutes">30 Minutes</option>
+            <option value="60 Minutes">60 Minutes</option>
+        </select>
+
+        <input type="date" id="date">
+        <input type="time" id="time">
+
+        <button type="submit">Book Session</button>
+    </form>
+
+    <!-- Output Section -->
+    <div id="output"></div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
