@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Login</title>
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h2>Admin Login</h2>
+        <input type="text" id="username" placeholder="Username">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+        <div class="error" id="error"></div>
+    </div>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwdQ8CmMhLXjaq6XDYu7ekqkL4tVN36Srp_FkLWw8PvQ8-jlUwzZOdeyyup7Dk8h9GqXQ/exec";
+
+        function login() {
+
+            const username = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            fetch(WEB_APP_URL, {
+                method: "POST",
+                mode: "no-cors",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "action=login&username=" + username + "&password=" + password
+            })
+                .then(() => {
+
+                    // Since we cannot read response in no-cors,
+                    // we check manually
+                    if (username === "" || password === "") {
+                        document.getElementById("error").innerText = "Enter username and password";
+                        return;
+                    }
+
+                    localStorage.setItem("adminLoggedIn", "true");
+                    window.location.href = "admin.html";
+
+                })
+                .catch(() => {
+                    document.getElementById("error").innerText = "Server Error";
+                });
+
+        }
+    </script>
+
+</body>
+
+</html>

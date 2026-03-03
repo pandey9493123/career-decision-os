@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Admin Dashboard</title>
+
+    <script>
+        if (localStorage.getItem("adminLoggedIn") !== "true") {
+            window.location.href = "login.html";
+        }
+    </script>
+
+    <style>
+        body {
+            font-family: Arial;
+            background: #f4f6f9;
+            padding: 30px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        button {
+            padding: 8px 15px;
+            background: red;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h2>Admin Dashboard</h2>
+        <button onclick="logout()">Logout</button>
+    </div>
+
+    <div class="card">
+        <h3>Total Bookings</h3>
+        <h1 id="totalBookings">Loading...</h1>
+    </div>
+
+    <script>
+        const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbwdQ8CmMhLXjaq6XDYu7ekqkL4tVN36Srp_FkLWw8PvQ8-jlUwzZOdeyyup7Dk8h9GqXQ/exec";
+
+        function logout() {
+            localStorage.removeItem("adminLoggedIn");
+            window.location.href = "login.html";
+        }
+
+        function loadStats() {
+
+            fetch(WEB_APP_URL, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/x-www-form-urlencoded"
+                },
+                body: "action=stats"
+            })
+                .then(res => res.json())
+                .then(data => {
+                    document.getElementById("totalBookings").innerText = data.totalBookings;
+                });
+
+        }
+
+        loadStats();
+    </script>
+
+</body>
+
+</html>
